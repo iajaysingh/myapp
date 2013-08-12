@@ -1,0 +1,29 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hub Tunnel</title>
+    <script src="full-pagebus-min.js"></script>
+    <script>
+        function Init() {
+            var OpenAjax = TIBR.__pageBus.openAjax,
+                    smash = TIBR.__pageBus.smash;
+            if (window.postMessage) {
+                var internalID = OpenAjax.hub.IframePMHubClient.queryURLParam("oahj");
+                var origin = OpenAjax.hub.IframePMHubClient.queryURLParam("oaho");
+                var securityToken = OpenAjax.hub.IframePMHubClient.queryURLParam("oaht");
+                  window.parent.parent.TIBR.OpenAjax.hub.IframePMContainer._pmListener.connectFromTunnel(internalID, origin, securityToken, window);
+            } else {
+                var initialMsg = new RegExp("[\\?&]oahm=([^&#]*)").exec(window.location.search);
+                if (!initialMsg) {
+                    throw new Error(OpenAjax.hub.Error.WrongProtocol);
+                }
+                var url = window.location.href + "#" + initialMsg[1];
+                window.location.replace(url);
+                var commLib = new smash.CommLib(false, window.parent.parent.TIBR.smash.SEComm.instances);
+                //var commLib = new smash.CommLib(false, window.parent.parent.TIB.smash.SEComm.instances);
+            }
+        }
+    </script>
+</head>
+<body onload="Init()"></body>
+</html>

@@ -9,6 +9,10 @@ class EvernoteController < ApplicationController
       note_store_url = user_store.getNoteStoreUrl(@current_user.evernote_access_token)
       @current_user.update_attributes(:note_store_url => note_store_url)
     end
+    @app_id = @current_tenant.config_get("client_id")
+    @locale = @current_tenant.config_get("locale")
+    @evernote_url = evernote_url
+    @tibbr_url    = tibbr_url
   end
 
   def notebooks

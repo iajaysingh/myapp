@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def current_tenant
-    Tenant.find_by_name("#{session[:tibbr_server_url]}###{session[:tenant_name]}")
+    @current_tenant ||= Tenant.find_by_name("#{session[:tibbr_server_url]}###{session[:tenant_name]}")
   end
 
   def tibbr_url

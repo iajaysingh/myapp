@@ -1,3 +1,37 @@
-<div>
-  Hello I have initialized the app Nicely :)
-</div>
+<script type="text/javascript">
+      var enote_init = {
+          tibbrHost      : "<%= @tibbr_host %>",
+          tibbr_prefix   : "",
+          tibbrTunnelUrl : "<%= @evernote_url + 'tunnel.html' %>",
+          tibbr_url      : "<%= @tibbr_url %>",
+          app_root       : "<%= @evernote_url %>",
+          app_id         : "<%= @app_id %>",
+          locale         : "<%= @locale %>",
+          user_id        : "<%= @current_user.id %>",
+          app_id         : "<%= @app_id %>"
+      }
+  </script>
+  <script type="text/javascript">
+      var tibr_init = {
+          plugins     : true,
+          host        : "<%= @tibbr_url %>",
+          tunnelUrl   : "<%= @evernote_url + 'tunnel.html' %>",
+          client_id   : "<%= @app_id %>",
+          onInitialize:function(){
+              var script = document.createElement("script");
+              script.type = 'text/javascript';
+              <% if COMPRESS_MODE -%>
+              script.src = '<%= ENOTE_CONTEXT %>javascripts/enote-min.js';
+              <% else -%>
+              script.setAttribute("data-main", "app/js/main");
+              script.setAttribute("src", "<%=  ENOTE_CONTEXT %>app/js/libs/require/require.js");
+              <% end -%>
+              var s = document.getElementsByTagName('link')[0];
+              s.parentNode.insertBefore(script, s);
+          }
+      };
+  </script>
+  <script type="text/javascript" src="<%= @tibbr_url %>connect/js/TIB.js"></script>
+  <div>
+    Yoooo hoooo!!!! Backbone app . . . .:)
+  </div>

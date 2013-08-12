@@ -67,6 +67,7 @@ class ApplicationController < ActionController::Base
 
   def logged_in_user
     @current_user ||= User.find_by_tenant_id_and_tibbr_user_id(session[:tenant_id], session[:user_id])
+    @current_tenant = Tenant.find(session[:tenant_id]);
   end
 
   def current_user
