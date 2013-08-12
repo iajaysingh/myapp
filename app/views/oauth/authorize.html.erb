@@ -1,0 +1,33 @@
+<% if @authorize_url %>
+  <script type="text/javascript">
+    function authorize(){
+      var popup = window.open("", "Evernote", "width=1000,height=500,menubar=no,resizable=no,titlebar=no");
+      popup.location.href = "<%= @authorize_url %>";
+    }
+  </script>
+  <div class="container-narrow">
+    <div class="header">
+      <ul class="nav nav-pills pull-right">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About App</a></li>
+        <li><a href="#">Who's who?</a></li>
+      </ul>
+      <h3 class="text-muted">Evernote Tibbr Integration</h3>
+    </div>
+    <div class="jumbotron">
+      <h1><img src="/images/logo.png"/></h1>
+      <p class="lead">Evernote makes it easy to remember things big and small from your everyday life using your computer, phone, tablet and the web.</p>
+      <p class="lead">Tibbr's collaboration, makes the experience even more wonderful.</p>
+      <p><a class="btn btn-large btn-success" href="#" onClick="return authorize();"><img src="/images/evernote-icon.png"/>Sign In</a></p>
+    </div>
+    <div class="footer">
+      <p>&copy; TIBCO 2013</p>
+    </div>
+  </div>
+<% end %>
+<% if @redirect_url %>
+  <script type="text/javascript">
+      window.opener.location.href = "<%= @redirect_url %>";
+      window.close();
+  </script>
+<% end %>
