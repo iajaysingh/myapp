@@ -1,0 +1,9 @@
+<% if(notebook_facets == "true") {%>
+    <li class="notebook-list-item">
+        <a href="#" class="notebook-name" id="<%= notebook.cid %>_<%= notebook.attributes.notebook_guid %>"><%= notebook.attributes.name %> (<%= notebook.attributes.note_count%>)</a>
+    </li>
+<%}else{%>
+    <li class="notebook-list-item">
+        <a href="#" class="notebook-name" id="<%= notebook.cid %>_<%= notebook.attributes.notebook_guid %>"><%= notebook.attributes.name %></a>
+    </li>
+<%}%>

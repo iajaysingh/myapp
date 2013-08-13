@@ -2,24 +2,20 @@ define([
     'jquery',
     'underscore',
     'e_note',
-    'models/note'
-    ], function($, _, ENote, Note){
+    'models/notebook'
+    ], function($, _, ENote, Notebook){
         return ENote.Collection.extend({
             initialize: function(){
-                this.urlRoot = 'evernote/notes';
-                this.filter_applied = {};
-                this.page = 1;
-                this.per_page = 10;
+                this.urlRoot = 'evernote/notebooks';
             },
-            model: Note,
-            fetchAll: function(guid){
+            model: Notebook,
+            fetchAll: function(){
                 var that = this;
                 $.ajax({
-                    url      : "evernote/notes.json",
+                    url      : "evernote/notebooks.json",
                     type     : "GET",
-                    data     : "filters[notebook_guid]=" + guid,
                     success  : function(res){
-                        that.add(res.notes);
+                        that.add(res.notebooks);
                         that.trigger("fetchAll", false, null);
                     },
                     error    : function(res){
@@ -29,3 +25,5 @@ define([
             }
         });
     });
+
+

@@ -2,6 +2,7 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  font-family: Verdana, helvetica, arial, sans-serif;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile-first views */
@@ -75,4 +76,41 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+li{
+    margin-top : 5px;
+}
+li.nav-header{
+    margin-left : -25px
+}
+li.active{
+    margin-left : 25px;
+}
+li.active a.notebook-name{
+    background-color: #6bb130;
+}
+li.notebook-list-item{
+    margin-left : 25px;
+}
+.main-container{
+    margin-top: 40px;
+}
+.nav-header{
+    font-size: 1.0em;
+}
+.td-note-title{
+    width : 700px;
+}
+.loader-container{
+    margin-top: 40px;
+    margin-left: 650px;
+}
+.main-ajax-loader{
+    height : 30px;
+}
+.loader-container-span{
+    margin-left: 650px;
+}
+.notes-ajax-loader{
+    height : 25px;
 }

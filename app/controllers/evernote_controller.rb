@@ -1,7 +1,7 @@
 class EvernoteController < ApplicationController
 
-  before_filter :logged_in_user, :only =>[:index]
-  before_filter :client_init, :only => [:notebooks, :notes, :create_notebook, :create_note, :index]
+  before_filter :logged_in_user, :tenant_in_use, :only =>[:index]
+  before_filter :logged_in_user, :client_init, :only => [:notebooks, :notes, :create_notebook, :create_note, :index]
 
   def index
     if @current_user.note_store_url.blank?
@@ -9,6 +9,7 @@ class EvernoteController < ApplicationController
       note_store_url = user_store.getNoteStoreUrl(@current_user.evernote_access_token)
       @current_user.update_attributes(:note_store_url => note_store_url)
     end
+
     @app_id = @current_tenant.config_get("client_id")
     @locale = @current_tenant.config_get("locale")
     @evernote_url = evernote_url
@@ -17,15 +18,16 @@ class EvernoteController < ApplicationController
 
   def notebooks
     note_store = @client.note_store(:note_store_url => @current_user.note_store_url)
-    note_books = note_store.listNotebooks(@current_user.evernote_access_token)
-    render_payload(note_books)
+    render_payload(NoteStore.get_notebooks(note_store, @current_user.evernote_access_token))
   end
 
   def notes
+    params[:page] = 0 if params[:page].blank?
+    params[:per_page] = 5 if params[:per_page].blank?
     note_store = @client.note_store(:note_store_url => @current_user.note_store_url)
-    filter = enable_filters filter, params[:filters]
+    filter = enable_filters params[:filters]
     result_spec = Evernote::EDAM::NoteStore::NotesMetadataResultSpec.new()
-    note_list   = note_store.findNotesMetadata(@current_user.evernote_access_token, filter, 0, 10, result_spec)
+    note_list   = note_store.findNotesMetadata(@current_user.evernote_access_token, filter, params[:page], params[:per_page], result_spec)
     render_payload(NoteStore.get_notes(note_store, @current_user.evernote_access_token, note_list))
   end
   

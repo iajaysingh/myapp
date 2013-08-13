@@ -67,9 +67,8 @@ class ApplicationController < ActionController::Base
 
   def logged_in_user
     @current_user ||= User.find_by_tenant_id_and_tibbr_user_id(session[:tenant_id], session[:user_id])
-    @current_tenant = Tenant.find(session[:tenant_id]);
   end
-
+  
   def current_user
     session[:tibbr_server_url] = params[:tibbr_server_url] unless params[:tibbr_server_url].blank?
     session[:client_id]        = params[:client_id]        unless params[:client_id].blank?
@@ -111,6 +110,10 @@ class ApplicationController < ActionController::Base
   end
   
   protected
+  def current_app_user
+
+  end
+
   def set_locale
     I18n.locale = @current_user.locale ||  browser_locale
   end

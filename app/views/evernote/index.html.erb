@@ -8,7 +8,8 @@
           app_id         : "<%= @app_id %>",
           locale         : "<%= @locale %>",
           user_id        : "<%= @current_user.id %>",
-          app_id         : "<%= @app_id %>"
+          app_id         : "<%= @app_id %>",
+          nb_facets      : "<%= APP_CONFIG[:notebook_facets] %>"
       }
   </script>
   <script type="text/javascript">
@@ -32,6 +33,46 @@
       };
   </script>
   <script type="text/javascript" src="<%= @tibbr_url %>connect/js/TIB.js"></script>
-  <div>
-    Yoooo hoooo!!!! Backbone app . . . .:)
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="brand" href="#">Evernote Tibbr Integration</a>
+        <div class="nav-collapse collapse">
+          <p class="navbar-text pull-right">
+            Logged in as <a href="#" class="navbar-link"><%= @current_user.display_name %></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loader-container">
+    <img src="/images/ajax-loader.gif" class="main-ajax-loader"></img>
+  </div>
+  <div class="container-fluid main-container hidden">
+    <div class="row-fluid">
+      <div class="span3">
+        <div class="well sidebar-nav">
+          <ul class="nav nav-list">
+            <li class="nav-header">Notebooks</li>
+          </ul>
+        </div>
+      </div>
+      <div class="span9">
+        <div class="loader-container-span hidden" style="margin-left: 550px;">
+          <img src="/images/spinner.gif" class="notes-ajax-loader"></img>
+        </div>
+        <table class="table table-striped note-list hidden">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="td-note-title">Note Title</th>
+              <th>Actions</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>

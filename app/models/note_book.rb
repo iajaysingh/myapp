@@ -7,7 +7,7 @@ class NoteBook
   end
 
   class << self
-    def serialize_notebook notebook
+    def serialize notebook
       {
         :notebook_guid => notebook.guid,
         :name          => notebook.name,
