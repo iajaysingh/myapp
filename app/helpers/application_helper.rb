@@ -1,4 +1,17 @@
 module ApplicationHelper
+
+  def translations_js
+    locale_array = I18n.fallbacks[I18n.locale].reverse
+    default_set_locale = I18n.locale
+    translations = {}
+    locale_array.each do |k|
+      I18n.locale = k
+      translations.deep_merge!({"webui" => I18n.t("webui")})
+    end
+    I18n.locale = default_set_locale
+    %{var I18n = I18n || {}; I18n.translations ={}}
+  end
+  
   def generate_shared_url(note_guid, shared_key)
     url = @current_user.note_store_url
     prelim_url = url.gsub("/notestore", "/")

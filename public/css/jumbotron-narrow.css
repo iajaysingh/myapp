@@ -114,3 +114,103 @@ li.notebook-list-item{
 .notes-ajax-loader{
     height : 25px;
 }
+.tibbr-ui-dialog {
+  border: 15px solid rgba(0, 0, 0, 0.7);
+  -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  border-radius: 13px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  /* for Safari */
+
+  background-clip: padding-box;
+  /* for IE9+, Firefox 4+, Opera, Chrome */
+
+  background-color: #000;
+  background-image: none;
+  padding: 0;
+}
+.tibbr-ui-dialog .ui-dialog-titlebar {
+  background: #fff;
+  border: 0 none;
+  border-top: 4px solid #D7E63D;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+.tibbr-ui-dialog .ui-icon-closethick {
+  background: url("../images/tibbr-icons-sprite.png") no-repeat scroll -540px -60px;
+  width: 18px;
+  height: 18px;
+}
+.tibbr-ui-dialog h2,
+.tibbr-ui-dialog h3 {
+  font-size: 18px;
+  margin: 0 0 10px;
+  color: #666666;
+  font-weight: 300;
+}
+.tibbr-ui-dialog .ui-state-hover {
+  background: none;
+  border: 0;
+}
+.tibbr-ui-dialog .ui-dialog-titlebar-close {
+  padding: 0;
+  margin-top: -5px;
+}
+.tibbr-ui-dialog .ui-dialog-content {
+  background: #fff;
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+.tibbr-ui-dialog input,
+.tibbr-ui-dialog select,
+.tibbr-ui-dialog textarea,
+.tibbr-ui-dialog button {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin: 0;
+  outline: none;
+}
+.header-wrap {
+    background: #eee;
+    padding: 14px 0;
+    color: #777;
+    margin-bottom: 10px;
+}
+.header-wrap h4 {
+    font-size: 26px;
+    margin: 0 0 0 25px;
+}
+.note-create-table{
+    border-collapse: separate;
+    border-spacing: 30px;
+    margin-left: -20px;
+}
+.note-creation{
+    margin-top: 20px;
+}
+.nav-header{
+    text-transform: none;
+}
+.note-content-textarea{
+    height: 100px;
+    overflow: hidden;
+    width : 400px;
+}
+.note-title-input{
+    width : 400px;
+}
+.selectpicker{
+    width : 410px;
+}
+.create-action-items{
+    margin-bottom: 10px;
+}

@@ -85,5 +85,6 @@ require([
             }
         }
         ENote.simplePlaceHolder();
+        window.$ = $;
 });
 

@@ -8,18 +8,25 @@ define([
             initialize: function(){
                 this.urlRoot = 'evernote/notes';
                 this.filter_applied = {};
-                this.page = 1;
-                this.per_page = 10;
+                this.current_guid = null;
             },
             model: Note,
             fetchAll: function(guid){
+                if(this.current_guid == null)
+                    this.current_guid = guid;
                 var that = this;
                 $.ajax({
                     url      : "evernote/notes.json",
                     type     : "GET",
                     data     : "filters[notebook_guid]=" + guid,
                     success  : function(res){
-                        that.add(res.notes);
+                        if(this.current_guid == guid)
+                            that.add(res.notes);
+                        else{
+                            that.models = new Array();
+                            that.add(res.notes);
+                            that.current_guid = guid;
+                        }
                         that.trigger("fetchAll", false, null);
                     },
                     error    : function(res){

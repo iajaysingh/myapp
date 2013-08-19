@@ -30,5 +30,10 @@ class Note
       content = Nokogiri::XML(content)
       content.text
     end
+
+    def fetch_and_serialize note_store, note, evernote_access_token
+      complete_note = note_store.getNote(evernote_access_token, note.guid, true, true, false, false)
+      return serialize(complete_note)
+    end
   end
 end

@@ -13,6 +13,7 @@ Evernote::Application.routes.draw do
       get :notes
       get :notebooks
       get :index
+      post :create_note
     end
   end
 end

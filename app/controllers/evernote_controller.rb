@@ -44,14 +44,17 @@ class EvernoteController < ApplicationController
     #Implementation for Resources
     #sanitizing the contents
     #================================
+    return render_error("Title can't be blank.") if params[:note][:title].blank?
+    return render_error("Notebook missing.")     if params[:note][:notebook_guid].blank?
     note = Evernote::EDAM::Type::Note.new()
     note.title = params[:note][:title]
     note.content = '<?xml version="1.0" encoding="UTF-8"?>' +
       '<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">' +
       '<en-note>' + params[:note][:content]  + '</en-note>'
+    note.notebookGuid = params[:note][:notebook_guid]
     note_store = @client.note_store(:note_store_url => @current_user.note_store_url)
     created_note = note_store.createNote(@current_user.evernote_access_token, note)
-    render_payload(Note.serialize_note(created_note))
+    render_payload(Note.fetch_and_serialize(note_store, created_note, @current_user.evernote_access_token))
   end
 
   #generally not available for third party applications

@@ -120,6 +120,9 @@ define(['order!jquery'
         }
 //        ENote.Moment = Moment;
         ENote.Dialog = Dialog;
+        ENote.closeDialog = function(){
+            $(".ui-dialog-content").dialog().dialog('destroy').remove();
+        }
         window.ENote = ENote;
         return ENote;
     });

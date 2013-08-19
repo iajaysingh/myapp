@@ -33,6 +33,8 @@
       };
   </script>
   <script type="text/javascript" src="<%= @tibbr_url %>connect/js/TIB.js"></script>
+  <script src="/ckeditor/ckeditor.js"></script>
+  <link href="/css/wkrte.css" rel="stylesheet"/>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid">
@@ -58,6 +60,7 @@
         </div>
       </div>
       <div class="span9">
+        <div class="create-btn"></div>
         <div class="loader-container-span hidden" style="margin-left: 550px;">
           <img src="/images/spinner.gif" class="notes-ajax-loader"></img>
         </div>
@@ -75,4 +78,5 @@
         </table>
       </div>
     </div>
+    <div id="tibbr-ui-dialog"></div>
   </div>
