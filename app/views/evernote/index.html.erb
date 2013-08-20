@@ -33,8 +33,6 @@
       };
   </script>
   <script type="text/javascript" src="<%= @tibbr_url %>connect/js/TIB.js"></script>
-  <script src="/ckeditor/ckeditor.js"></script>
-  <link href="/css/wkrte.css" rel="stylesheet"/>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid">
@@ -55,13 +53,14 @@
       <div class="span3">
         <div class="well sidebar-nav">
           <ul class="nav nav-list">
-            <li class="nav-header">Notebooks</li>
+            <li class="nav-header">Notebooks<span class="pull-right"><a class="create-notebook" href="#"><img src="/images/drop_down.png" alt="Create"/></a></span></li>
           </ul>
         </div>
       </div>
       <div class="span9">
         <div class="create-btn"></div>
-        <div class="loader-container-span hidden" style="margin-left: 550px;">
+        <h3 class="current_notebook"></h3>
+        <div class="loader-container-span hidden" style="margin-left: 500px; min-height: 5px;">
           <img src="/images/spinner.gif" class="notes-ajax-loader"></img>
         </div>
         <table class="table table-striped note-list hidden">
@@ -79,4 +78,11 @@
       </div>
     </div>
     <div id="tibbr-ui-dialog"></div>
+    <div class="hidden">
+      <ul class="nb-create hidden">
+        <li>
+          <a class="create-new-nb" href="#">Create</a>
+        </li>
+      </ul>
+    </div>
   </div>

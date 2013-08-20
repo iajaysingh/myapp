@@ -18,7 +18,7 @@ class EvernoteController < ApplicationController
 
   def notebooks
     note_store = @client.note_store(:note_store_url => @current_user.note_store_url)
-    render_payload(NoteStore.get_notebooks(note_store, @current_user.evernote_access_token))
+    render_payload(NoteStore.get_notebooks(note_store, @current_user.evernote_access_token, @current_user.time_zone))
   end
 
   def notes
@@ -28,14 +28,14 @@ class EvernoteController < ApplicationController
     filter = enable_filters params[:filters]
     result_spec = Evernote::EDAM::NoteStore::NotesMetadataResultSpec.new()
     note_list   = note_store.findNotesMetadata(@current_user.evernote_access_token, filter, params[:page], params[:per_page], result_spec)
-    render_payload(NoteStore.get_notes(note_store, @current_user.evernote_access_token, note_list))
+    render_payload(NoteStore.get_notes(note_store, @current_user.evernote_access_token, note_list, @current_user.time_zone))
   end
   
   def create_notebook
-    notebook = Evernote::EDAM::Type::Notebook.new(:name => params[:notebook][:name], :defaultNotebook => params[:notebook][:is_default])
+    notebook = Evernote::EDAM::Type::Notebook.new(:name => params[:notebook][:title], :defaultNotebook => params[:notebook][:is_default] || false)
     note_store = @client.note_store(:note_store_url => @current_user.note_store_url)
     created_notebook = note_store.createNotebook(@current_user.evernote_access_token, notebook)
-    render_payload(NoteBook.serialize_notebook(created_notebook))
+    render_payload(NoteBook.serialize(created_notebook, @current_user.time_zone))
   end
 
   def create_note
@@ -54,7 +54,7 @@ class EvernoteController < ApplicationController
     note.notebookGuid = params[:note][:notebook_guid]
     note_store = @client.note_store(:note_store_url => @current_user.note_store_url)
     created_note = note_store.createNote(@current_user.evernote_access_token, note)
-    render_payload(Note.fetch_and_serialize(note_store, created_note, @current_user.evernote_access_token))
+    render_payload(Note.fetch_and_serialize(note_store, created_note, @current_user.evernote_access_token, @current_user.time_zone))
   end
 
   #generally not available for third party applications
@@ -90,7 +90,7 @@ class EvernoteController < ApplicationController
     note_store = @client.note_store(:note_store_url => @current_user.note_store_url)
     begin
       note = note_store.copyNote(@current_user.evernote_access_token, params[:note_guid], params[:notebook_guid])
-      note = Note.serialize_note(note)
+      note = Note.serialize(note,  @current_user.time_zone)
       render_payload(note)
     rescue => ex
       Rails.logger.error "Error :: #{ex.message}"

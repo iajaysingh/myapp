@@ -103,13 +103,14 @@ li.notebook-list-item{
 }
 .loader-container{
     margin-top: 40px;
-    margin-left: 650px;
+    margin-left: 500px;
 }
 .main-ajax-loader{
     height : 30px;
 }
 .loader-container-span{
-    margin-left: 650px;
+    margin-left: 500px;
+    min-height: 5px;
 }
 .notes-ajax-loader{
     height : 25px;
@@ -213,4 +214,8 @@ li.notebook-list-item{
 }
 .create-action-items{
     margin-bottom: 10px;
+}
+ul
+{
+    list-style-type: none;
 }

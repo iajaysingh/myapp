@@ -22,7 +22,7 @@ require.config({
 require([
     "order!jquery",
     'order!require/jquery-ui',
-    'order!require/jquery.qtip',
+    'order!require/qtip',
     "order!underscore",
     'order!backbone',
     'order!e_note',
