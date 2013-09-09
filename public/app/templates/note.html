@@ -1,8 +1,19 @@
-<div>
-    <span>Title : </span>
-    <span><%= note.attributes.title %></span>
-</div>
-<div>
-    <span>Content : </span>
-    <span><%= note.attributes.html_content %></span>
+<div class="note-details">
+    <div>
+        <span>Title : </span>
+        <span><%= note.attributes.title %></span>
+    </div>
+    <div>
+        <span>Content : </span>
+        <span><%= note.attributes.html_content %></span>
+    </div>
+    <div>
+        <ul id="tag_list">
+            <% _.each(note.attributes.tags, function(tag){ %>
+                <li>
+                    <%= tag %>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
 </div>

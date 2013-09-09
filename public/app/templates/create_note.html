@@ -1,3 +1,4 @@
+
 <div class="header-wrap skype-header">
     <h4 class="heading"><img src="/images/evernote-icon.png">Create a note</h4>
 </div>
@@ -17,7 +18,15 @@
                     <label class="nav-header">Note Content</label>
                 </td>
                 <td>
-                    <textarea name="note[content]" class="note-content-textarea" placeholder = "Enter note content"></textarea>
+                    <textarea name="note[content]" id="note_content" class="note-content-textarea" placeholder = "Enter note content"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="nav-header">Tags</label>
+                </td>
+                <td>
+                    <ul id="tag_list"></ul>
                 </td>
             </tr>
             <tr >
@@ -27,7 +36,7 @@
                 <td>
                     <select class="selectpicker" name="note[notebook_guid]">
                         <% _.each(notebooks, function(notebook){ %>
-                        <option value="<%= notebook.attributes.notebook_guid%>"><%= notebook.attributes.name %></option>
+                            <option value="<%= notebook.attributes.notebook_guid%>"><%= notebook.attributes.name %></option>
                         <% }); %>
                     </select>
                 </td>
@@ -39,3 +48,5 @@
     <a class="btn btn-medium cancel pull-right" href="#" style="margin-left:10px;">Cancel</a>
     <a class="btn btn-medium btn-success save-note pull-right" style="color:#ffffff;" href="#">Save</a>
 </div>
+<script type="text/javascript">
+</script>

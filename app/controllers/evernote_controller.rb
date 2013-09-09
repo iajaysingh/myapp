@@ -48,10 +48,9 @@ class EvernoteController < ApplicationController
     return render_error("Notebook missing.")     if params[:note][:notebook_guid].blank?
     note = Evernote::EDAM::Type::Note.new()
     note.title = params[:note][:title]
-    note.content = '<?xml version="1.0" encoding="UTF-8"?>' +
-      '<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">' +
-      '<en-note>' + params[:note][:content]  + '</en-note>'
+    note.content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\"><en-note><![CDATA[#{params[:note][:content]}]]></en-note>"
     note.notebookGuid = params[:note][:notebook_guid]
+    note.tagNames     = params[:note][:tags]
     note_store = @client.note_store(:note_store_url => @current_user.note_store_url)
     created_note = note_store.createNote(@current_user.evernote_access_token, note)
     render_payload(Note.fetch_and_serialize(note_store, created_note, @current_user.evernote_access_token, @current_user.time_zone))

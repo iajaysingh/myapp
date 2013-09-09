@@ -18,6 +18,7 @@ module Evernote
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.autoload_paths += %W(#{config.root}/lib)
     config.i18n.default_locale = :en
     I18n.reload!
     I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)

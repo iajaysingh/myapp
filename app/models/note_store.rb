@@ -12,7 +12,9 @@ class NoteStore
       notes = Array.new()
       note_list.notes.each do |note|
         note_obj = note_store.getNote(evernote_access_token, note.guid, true, true, false, false)
-        notes << Note.serialize(note_obj, time_zone)
+        serialized_note = Note.serialize(note_obj, time_zone)
+        serialized_note[:tags] = note_store.getNoteTagNames(evernote_access_token, note.guid) if note_obj.tagGuids.present?
+        notes << serialized_note
       end
       {:total_count => note_list.totalNotes, :notes => notes}
     end

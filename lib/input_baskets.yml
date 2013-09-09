@@ -1,0 +1,55 @@
+baskets:
+  basket_1:
+    items:
+      item_1:
+        name: 'Soap'
+        type: 'other'
+        quantity: '1'
+        price: '30.50'
+      item_2:
+        name: 'Potato Chips'
+        type: 'food'
+        quantity: '1'
+        price: '22.50'
+      item_3:
+        name: 'Music CD'
+        type: 'other'
+        quantity: '1'
+        price: '250.59'
+      item_4:
+        name: 'Perfume bottle'
+        type: 'imported'
+        quantity: '1'
+        price: '2100.99'
+      item_5:
+        name: 'Crocin'
+        type: 'medicines'
+        quantity: '1'
+        price: '19.75'
+  basket_2:
+    items:
+      item_1:
+        name: 'Handbag'
+        type: 'imported'
+        quantity: '1'
+        price: '2200.59'
+      item_2:
+        name: 'Sunglasses'
+        type: 'imported'
+        quantity: '1'
+        price: '1250.00'
+      item_3:
+        name: 'Perfume bottle'
+        type: 'other'
+        quantity: '1'
+        price: '450.49'
+      item_4:
+        name: 'Chocolates'
+        type: 'imported,food'
+        quantity: '1'
+        price: '450.25'
+      item_5:
+        name: 'Teddy Bear'
+        type: 'toys'
+        quantity: '1'
+        price: '250.59'

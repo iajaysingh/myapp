@@ -7,6 +7,8 @@ define([
     'order!models/note',
     'order!models/notebook',
     'order!require/dialog_box',
+    'order!require/nicEdit',
+    'order!require/tagit',
     'text!templates/notebook_list_item.html',
     'text!templates/note_list_item.html',
     'text!templates/note.html',
@@ -14,8 +16,8 @@ define([
     'text!templates/create_note.html',
     'text!templates/create_notebook.html',
     'text!templates/heads_up.html'
-], function($, _, ENote, Notes, Notebooks, Note, Notebook, DialogBox,
-            NotebookItemTempl, NoteItemTempl, NoteTempl, 
+], function($, _, ENote, Notes, Notebooks, Note, Notebook, DialogBox, Nicedit,
+            Tagit, NotebookItemTempl, NoteItemTempl, NoteTempl,
             CreateNoteBtn, CreateNoteTempl, CreateNotebookTempl, HeadsUpTempl){
     return ENote.View.extend({
         el: 'body',
@@ -47,7 +49,7 @@ define([
             if(!is_error){
                 $(".span3 .nav-list .notebook-list-item").remove();
                 for(var i in this.notebooks.models){
-                    this.$el.find("ul.nav-list").append(_.template(NotebookItemTempl, {notebook : this.notebooks.models[i], notebook_facets : enote_init["nb_facets"]}))
+                    this.$el.find("ul.nav-list").append(_.template(NotebookItemTempl, {notebook : this.notebooks.models[i], n_index : (parseInt(i) + 1), notebook_facets : enote_init["nb_facets"]}))
                 }
                 this.$el.find(".create-btn").html(_.template(CreateNoteBtn));
                 $("div.loader-container").addClass("hidden");
@@ -115,11 +117,17 @@ define([
                         my: "center",
                         at: "center",
                         of: $(".span9")
-                        }
+                        },
+                    open: function(){
+                         $("#tag_list").tagit({
+                             readOnly : true
+                         });
+                     }
                 });
         },
         renderCreateNote: function(event){
             event.preventDefault();
+            var that = this;
             DialogBox.view(_.template(CreateNoteTempl, {notebooks : this.notebooks.models}), {
                     width: 630,
                     modal: false,
@@ -128,7 +136,13 @@ define([
                         my: "center",
                         at: "center",
                         of: $(".span9")
-                        }
+                        },
+                     open: function(){
+                         that.nicEditor = new nicEditor({iconsPath : '../../../images/nicEditorIcons.gif'}).panelInstance('note_content');
+                         $("#tag_list").tagit({
+                             placeholderText : "Add tags to the note."
+                         });
+                     }
                 });
         },
         renderCreateNotebook: function(event){
@@ -149,8 +163,16 @@ define([
         },
         createNote: function(event){
             event.preventDefault();
-            var contents = $('#note_creation').serialize();
+            var contents = {};
+            var title = $(".note-title-input").val();
+            var note_content = this.nicEditor.instanceById("note_content").getContent();
+            var tags = $("#tag_list").tagit("assignedTags");
+            contents["note"] = {};
+            contents["note"]["title"]   = title;
+            contents["note"]["content"] = note_content;
+            contents["note"]["tags"]    = tags
             this.note.notebook_guid = $(".selectpicker").val();
+            contents["note"]["notebook_guid"] = this.note.notebook_guid;
             this.note.create(contents);
         },
         createNotebook: function(event){
